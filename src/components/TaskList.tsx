@@ -1,3 +1,4 @@
+import { ClipboardText } from 'phosphor-react'
 import { Task } from '../App'
 import { Item } from './Item'
 import styles from './TaskList.module.css'
@@ -17,26 +18,35 @@ export function TaskList({ list, onDeleteTask, onConcludeTask }: TaskListProps) 
       <header className={styles.header}>
         <div className={styles.headerWrapper}>
           <div>
-            <span>
+            <span className={styles.created}>
               Tarefas criadas
             </span>
-              <span>{list.length}</span>
+              <p>{list.length}</p>
           </div>
           <div>
-            <span>
+            <span className={styles.finished}>
               Concluídas
             </span>
-            <span>{list.filter(item => item.concluded).length} de {list.length}</span>
+            <p>{list.filter(item => item.concluded).length} de {list.length}</p>
           </div>
         </div>
       </header>
 
       <div className={list.length === 0 ? styles.listEmpty : ''}>
-        {list.map((item: Task) => {
-          return(
-            <Item key={item.id} task={item} onDeleteTask={onDeleteTask} onConcludeTask={onConcludeTask}/>
+        {list.length > 0 
+          ? list.map((item: Task) => {
+            return(
+              <Item key={item.id} task={item} onDeleteTask={onDeleteTask} onConcludeTask={onConcludeTask}/>
+            )
+          })
+          : (
+            <>
+              <ClipboardText size={56} />
+              <strong>Você ainda não tem tarefas cadastradas</strong>
+              <p>Crie tarefas e organize seus itens a fazer</p>
+            </>
           )
-        })}
+        }
       </div>
 
     </div>

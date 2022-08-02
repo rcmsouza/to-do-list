@@ -37,12 +37,16 @@ function App() {
     setList([taskToCreate, ...list])
   }
 
+  function ordenateTasks(x: Task, y: Task) {
+      return (x.concluded === y.concluded) ? 0 : x.concluded ? 1 : -1;
+  }
+
 
   function handleConcludeTask(taskToConclude: Task) {
-    let newTaskList: Task[] = list.filter(task => { return task.id !== taskToConclude.id })
+    const newTaskList: Task[] = list.filter(task => { return task.id !== taskToConclude.id })
     newTaskList.push(taskToConclude)
+    newTaskList.sort(ordenateTasks)
     setList(newTaskList)
-    
   } 
 
   return (

@@ -15,8 +15,6 @@
   --blue-dark: #1E6F9F;
   
   --danger: #E25858;
-
-  --background: #454545;
 }
 
 * {
@@ -26,7 +24,7 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--gray-600);
 }
 
 body, input, button {
